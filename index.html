@@ -1,0 +1,1356 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MufiZ Documentation - Mufi Lang with Ziggyness</title>
+        <meta
+            name="description"
+            content="Complete documentation for MufiZ programming language - Mufi Lang with Ziggyness"
+        />
+        <link rel="stylesheet" href="styles.css" />
+        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1>MufiZ</h1>
+                    <span class="tagline">Mufi Lang with Ziggyness</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#installation">Installation</a></li>
+                    <li><a href="#syntax">Syntax</a></li>
+                    <li><a href="#standard-library">Standard Library</a></li>
+                    <li>
+                        <a
+                            href="https://github.com/Mufi-Lang/MufiZ"
+                            target="_blank"
+                            >GitHub</a
+                        >
+                    </li>
+                </ul>
+                <div class="nav-toggle">
+                    <
+
+                        s
+
+                    pan></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+            <section id="home" class="hero">
+                <div class="hero-content">
+                    <h1>MufiZ</h1>
+                    <p class="hero-subtitle">Mufi Lang with Ziggyness</p>
+                    <p class="hero-description">
+                        A powerful programming language that integrates the
+                        Mufi-Lang compiler with Zig, utilizing
+                        Zig's build system for easy cross-compatibility,
+                        and enhanced memory safety.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#installation" class="btn btn-primary"
+                            >Get Started</a
+                        >
+                        <a
+                            href="https://github.com/Mufi-Lang/MufiZ"
+                            class="btn btn-secondary"
+                            target="_blank"
+                            >View on GitHub</a
+                        >
+                    </div>
+                    <div class="version-info">
+                        <span class="version-badge"
+                            >Latest: v0.10.0 "Echo"</span
+                        >
+                        <span class="zig-version">Zig v0.15.2</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="features" class="section">
+                <div class="container">
+                    <h2>Features</h2>
+                    <div class="overview-grid">
+                        <div class="feature-card">
+                            <h3>🚀 Cross-Platform</h3>
+                            <p>
+                                Built with Zig's build system for easy
+                                cross-compatibility and efficient caching across
+                                different platforms.
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>🔒 Memory Safe</h3>
+                            <p>
+                                Enhanced memory safety through integration with
+                                Zig's memory management capabilities.
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>📚 Rich Standard Library</h3>
+                            <p>
+                                Comprehensive standard library with modules for
+                                math, collections, networking, file system
+                                operations, and more.
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>⚡ SIMD Optimizations</h3>
+                            <p>
+                                Advanced SIMD optimizations for high-performance
+                                string operations and mathematical computations.
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>🔧 Interactive REPL</h3>
+                            <p>
+                                Enhanced interactive shell with improved input
+                                handling and cleaner user experience.
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>🎯 Matrix Operations</h3>
+                            <p>
+                                Built-in support for matrix operations including
+                                linear algebra functions.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="installation" class="section">
+                <div class="container">
+                    <h2>Installation</h2>
+                    <div class="install-section">
+                        <h3>MufiZUp Unix Install</h3>
+                        <div class="install-methods">
+                            <div class="install-method">
+                                <h4>One-Line Install</h4>
+                                <div class="code-block">
+                                    <pre><code>curl -fsSL https://install.mufi-lang.org/installer.sh | sudo sh -s install</code></pre>
+                                </div>
+                                <p>
+                                    Visit
+                                    <a
+                                        href="https://install.mufi-lang.org"
+                                        target="_blank"
+                                        >install.mufi-lang.org</a
+                                    >
+                                    for more information.
+                                </p>
+                            </div>
+                        </div>
+
+                        <h3>Package Managers</h3>
+                        <div class="install-methods">
+                            <div class="install-method">
+                                <h4>Homebrew (macOS/Linux)</h4>
+                                <div class="code-block">
+                                    <pre><code>brew tap Mustafif/homebrew-mufi
+brew install mufiz</code></pre>
+                                </div>
+                            </div>
+                            <div class="install-method">
+                                <h4>Scoop (Windows)</h4>
+                                <div class="code-block">
+                                    <pre><code>scoop bucket add mufi-bucket https://github.com/Mustafif/mufi-bucket
+scoop install mufiz</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>Build from Source</h3>
+                        <div class="code-block">
+                            <pre><code>git clone https://github.com/Mufi-Lang/MufiZ.git
+cd MufiZ
+zig build</code></pre>
+                        </div>
+
+                        <h3>Build Options</h3>
+                        <p>
+                            MufiZ supports various build features that can be
+                            enabled or disabled:
+                        </p>
+                        <ul>
+                            <li>
+                                <code>-Denable_net</code> - Enables the network
+                                module
+                            </li>
+                            <li>
+                                <code>-Denable_fs</code> - Enables the
+                                filesystem module
+                            </li>
+                            <li>
+                                <code>-Dsandbox</code> - Enables sandbox mode
+                                (REPL only)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="syntax" class="section">
+                <div class="container">
+                    <h2>Language Syntax</h2>
+
+                    <div class="syntax-section">
+                        <h3>Basic Usage</h3>
+                        <div class="code-block">
+                            <pre><code>// Run a script
+mufiz --run script.mufi
+
+// Start interactive REPL
+mufiz --repl
+
+// Link additional scripts
+mufiz --run main.mufi --link utils.mufi
+
+// Show help
+mufiz --help</code></pre>
+                        </div>
+
+                        <h3>Data Structures</h3>
+                        <div class="syntax-grid">
+                            <div class="syntax-item">
+                                <h4>Float Vectors</h4>
+                                <div class="code-block">
+                                    <pre><code>var vector = {1, 2, 3, 4, 5};
+var coords = {10.5, 20.3, 15.8};</code></pre>
+                                </div>
+                            </div>
+                            <div class="syntax-item">
+                                <h4>Hash Tables</h4>
+                                <div class="code-block">
+                                    <pre><code>var dict = #{"key": "value", "name": "John"};
+var config = #{"debug": true, "port": 8080};</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>Variables and Constants</h3>
+                        <div class="code-block">
+                            <pre><code>// Variables (mutable)
+var x = 10;
+var name = "MufiZ";
+
+// Constants (immutable)
+const PI = 3.14159;
+const VERSION = "0.10.0";</code></pre>
+                        </div>
+
+                        <h3>Control Flow</h3>
+                        <div class="syntax-grid">
+                            <div class="syntax-item">
+                                <h4>Conditionals</h4>
+                                <div class="code-block">
+                                    <pre><code>if (x > 0) {
+    print("Positive");
+} else if (x < 0) {
+    print("Negative");
+} else {
+    print("Zero");
+}</code></pre>
+                                </div>
+                            </div>
+                            <div class="syntax-item">
+                                <h4>Switch Statements</h4>
+                                <div class="code-block">
+                                    <pre><code>switch(value) {
+    case 1 => { print("One"); },
+    case 2 => { print("Two"); },
+    _ => { print("Other"); }
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>Loops</h3>
+                        <div class="syntax-grid">
+                            <div class="syntax-item">
+                                <h4>For Loops</h4>
+                                <div class="code-block">
+                                    <pre><code>for (var i = 0; i < 10; i = i + 1) {
+    print(i);
+}</code></pre>
+                                </div>
+                            </div>
+                            <div class="syntax-item">
+                                <h4>Foreach Loops</h4>
+                                <div class="code-block">
+                                    <pre><code>// Range iteration
+foreach (i in 1..10) {
+    print(i);
+}
+
+// Collection iteration
+var list = {1, 2, 3, 4, 5};
+foreach (item in list) {
+    print(item);
+}</code></pre>
+                                </div>
+                            </div>
+                            <div class="syntax-item">
+                                <h4>While Loops</h4>
+                                <div class="code-block">
+                                    <pre><code>var i = 0;
+while (i < 10) {
+    print(i);
+    i = i + 1;
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>Functions</h3>
+                        <div class="code-block">
+                            <pre><code>fun add(a, b) {
+    return a + b;
+}
+
+fun greet(name) {
+    return format("Hello, {}!", name);
+}</code></pre>
+                        </div>
+
+                        <h3>String Formatting</h3>
+                        <div class="code-block">
+                            <pre><code>// Using format function
+var name = "World";
+var greeting = format("Hello, {}!", name);
+
+// F-string style (alias for format)
+var message = f("The answer is {}", 42);</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="standard-library" class="section">
+                <div class="container">
+                    <h2>Standard Library Functions</h2>
+                    <p>
+                        MufiZ provides a comprehensive standard library
+                        organized into modules:
+                    </p>
+
+                    <div class="function-modules">
+                        <div class="module-nav">
+                            <button
+                                class="module-btn active"
+                                data-module="core"
+                            >
+                                Core
+                            </button>
+                            <button class="module-btn" data-module="math">
+                                Math
+                            </button>
+                            <button
+                                class="module-btn"
+                                data-module="collections"
+                            >
+                                Collections
+                            </button>
+                            <button class="module-btn" data-module="filesystem">
+                                Filesystem
+                            </button>
+                            <button class="module-btn" data-module="network">
+                                Network
+                            </button>
+                            <button class="module-btn" data-module="time">
+                                Time
+                            </button>
+                            <button class="module-btn" data-module="utils">
+                                Utils
+                            </button>
+                            <button class="module-btn" data-module="matrix">
+                                Matrix
+                            </button>
+                        </div>
+
+                        <div id="core" class="module-content active">
+                            <h3>Core Functions</h3>
+                            <div class="function-list">
+                                <div class="function-item">
+                                    <h4>Core Function Examples</h4>
+                                    <div class="code-example">
+                                        <pre><code>// Type checking and conversion
+var data = input();                // Read user input
+var dataType = what_is(data);      // Check type: "string"
+
+// Convert between types
+var numStr = "42";
+var number = int(numStr);          // 42
+var decimal = double("3.14");      // 3.14
+var text = str(number);            // "42"
+
+// Input validation
+print("Enter your age:");
+var ageInput = input();
+if (what_is(int(ageInput)) == "number") {
+    var age = int(ageInput);
+    print(format("You are {} years old", age));
+}</code></pre>
+                                    </div>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Input/Output Functions</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>input()</code> - Reads input
+                                            from stdin
+                                        </li>
+                                        <li>
+                                            <code>print(value)</code> - Prints
+                                            value to stdout
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Type Conversion Functions</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>int(value)</code> - Converts
+                                            to integer
+                                        </li>
+                                        <li>
+                                            <code>double(value)</code> -
+                                            Converts to double
+                                        </li>
+                                        <li>
+                                            <code>str(value)</code> - Converts
+                                            to string
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Type Inspection Functions</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>what_is(value)</code> -
+                                            Returns type as string
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="math" class="module-content">
+                            <h3>Math Functions</h3>
+                            <div class="function-list">
+                                <div class="function-item">
+                                    <h4>Math Function Examples</h4>
+                                    <div class="code-example">
+                                        <pre><code>// Basic mathematical operations
+var distance = abs(-5.5);          // 5.5
+var squared = pow(4, 2);           // 16
+var root = sqrt(16);               // 4.0
+
+// Trigonometry (angles in radians)
+var piVal = pi();                  // 3.141592653589793
+var sineVal = sin(piVal / 2);      // 1.0
+var cosineVal = cos(0);            // 1.0
+
+// Logarithms
+var naturalLog = ln(2.718);        // ≈ 1.0
+var log2Val = log2(8);             // 3.0
+
+// Random numbers
+var random = rand();               // 0.0 to 1.0
+var gaussian = randn();            // Normal distribution
+
+// Complex numbers
+var c1 = complex(3, 4);            // 3 + 4i
+var angle = phase(c1);             // Phase angle</code></pre>
+                                    </div>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Basic Functions</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>abs(number)</code> - Absolute
+                                            value
+                                        </li>
+                                        <li>
+                                            <code>pow(base, exp)</code> - Power
+                                            function
+                                        </li>
+                                        <li>
+                                            <code>sqrt(number)</code> - Square
+                                            root
+                                        </li>
+                                        <li>
+                                            <code>ceil(number)</code> - Ceiling
+                                            function
+                                        </li>
+                                        <li>
+                                            <code>floor(number)</code> - Floor
+                                            function
+                                        </li>
+                                        <li>
+                                            <code>round(number)</code> - Round
+                                            to nearest integer
+                                        </li>
+                                        <li>
+                                            <code>max(a, b)</code> - Maximum of
+                                            two numbers
+                                        </li>
+                                        <li>
+                                            <code>min(a, b)</code> - Minimum of
+                                            two numbers
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Trigonometric Functions</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>sin(number)</code> - Sine
+                                            function
+                                        </li>
+                                        <li>
+                                            <code>cos(number)</code> - Cosine
+                                            function
+                                        </li>
+                                        <li>
+                                            <code>tan(number)</code> - Tangent
+                                            function
+                                        </li>
+                                        <li>
+                                            <code>asin(number)</code> - Arcsine
+                                            function
+                                        </li>
+                                        <li>
+                                            <code>acos(number)</code> -
+                                            Arccosine function
+                                        </li>
+                                        <li>
+                                            <code>atan(number)</code> -
+                                            Arctangent function
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Logarithmic Functions</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>ln(number)</code> - Natural
+                                            logarithm
+                                        </li>
+                                        <li>
+                                            <code>log2(number)</code> - Base-2
+                                            logarithm
+                                        </li>
+                                        <li>
+                                            <code>log10(number)</code> - Base-10
+                                            logarithm
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Random & Constants</h4>
+                                    <ul class="function-sublist">
+                                        <li><code>pi()</code> - Pi constant</li>
+                                        <li>
+                                            <code>rand()</code> - Random float
+                                            [0,1)
+                                        </li>
+                                        <li>
+                                            <code>randn()</code> - Random normal
+                                            distribution
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Complex Numbers</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>complex(real, imag)</code> -
+                                            Creates complex number
+                                        </li>
+                                        <li>
+                                            <code>phase(complex)</code> - Phase
+                                            of complex number
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="collections" class="module-content">
+                            <h3>Collections Functions</h3>
+                            <div class="function-list">
+                                <div class="function-item">
+                                    <h4>Collections Examples</h4>
+                                    <div class="code-example">
+                                        <pre><code>// Create data structures
+var myList = linked_list();
+var userDB = hash_table();
+var measurements = fvec(100);
+
+// List operations
+push(myList, "item1");
+push(myList, "item2");
+var item = pop(myList);
+
+// Hash table operations
+put(userDB, "name", "Alice");
+var name = get(userDB, "name");
+
+// Vector operations
+var vec1 = {1, 2, 3};
+var vec2 = {4, 5, 6};
+var dot_product = dot(vec1, vec2);    // 32
+var magnitude = norm(vec1);           // √14
+
+// Statistical operations
+var scores = {85, 92, 78, 96, 88};
+var average = mean(scores);           // 87.8
+var total = sum(scores);              // 439</code></pre>
+                                    </div>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Data Structure Creation</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>linked_list()</code> - Creates
+                                            new linked list
+                                        </li>
+                                        <li>
+                                            <code>hash_table()</code> - Creates
+                                            new hash table
+                                        </li>
+                                        <li>
+                                            <code>fvec(capacity)</code> -
+                                            Creates new float vector
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>List Operations</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>push(list, value)</code> -
+                                            Adds element to end of list
+                                        </li>
+                                        <li>
+                                            <code>pop(list)</code> - Removes
+                                            last element
+                                        </li>
+                                        <li>
+                                            <code>push_front(list, value)</code>
+                                            - Adds element to front
+                                        </li>
+                                        <li>
+                                            <code>pop_front(list)</code> -
+                                            Removes first element
+                                        </li>
+                                        <li>
+                                            <code
+                                                >insert(list, index,
+                                                value)</code
+                                            >
+                                            - Inserts element at index
+                                        </li>
+                                        <li>
+                                            <code>remove(collection, key)</code>
+                                            - Removes element
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Access & Query</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>len(list)</code> - Gets length
+                                            of list
+                                        </li>
+                                        <li>
+                                            <code>get(list, index)</code> - Gets
+                                            element at index
+                                        </li>
+                                        <li>
+                                            <code>nth(list, index)</code> - Gets
+                                            nth element
+                                        </li>
+                                        <li>
+                                            <code>contains(list, value)</code> -
+                                            Checks if list contains value
+                                        </li>
+                                        <li>
+                                            <code>is_empty(list)</code> - Checks
+                                            if list is empty
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Hash Table Operations</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code
+                                                >put(hash_table, key,
+                                                value)</code
+                                            >
+                                            - Puts element into hash table
+                                        </li>
+                                        <li>
+                                            <code>pairs(hash_table)</code> -
+                                            Gets key-value pairs
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Vector Operations</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code
+                                                >linspace(start, end,
+                                                count)</code
+                                            >
+                                            - Creates evenly spaced values
+                                        </li>
+                                        <li>
+                                            <code>dot(vector1, vector2)</code> -
+                                            Dot product
+                                        </li>
+                                        <li>
+                                            <code>cross(vector1, vector2)</code>
+                                            - Cross product (3D)
+                                        </li>
+                                        <li>
+                                            <code>norm(vector)</code> -
+                                            Euclidean norm
+                                        </li>
+                                        <li>
+                                            <code>proj(vector1, vector2)</code>
+                                            - Vector projection
+                                        </li>
+                                        <li>
+                                            <code>angle(vector1, vector2)</code>
+                                            - Angle between vectors
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Statistical Functions</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>sum(vector)</code> - Sum of
+                                            all elements
+                                        </li>
+                                        <li>
+                                            <code>mean(vector)</code> - Mean of
+                                            all elements
+                                        </li>
+                                        <li>
+                                            <code>std(vector)</code> - Standard
+                                            deviation
+                                        </li>
+                                        <li>
+                                            <code>vari(vector)</code> - Variance
+                                            of elements
+                                        </li>
+                                        <li>
+                                            <code>maxl(vector)</code> - Maximum
+                                            element
+                                        </li>
+                                        <li>
+                                            <code>minl(vector)</code> - Minimum
+                                            element
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="filesystem" class="module-content">
+                            <h3>Filesystem Functions</h3>
+                            <div class="function-list">
+                                <div class="function-item">
+                                    <h4>Filesystem Examples</h4>
+                                    <div class="code-example">
+                                        <pre><code>// File operations
+create_file("data.txt");
+write_file("data.txt", "Hello, MufiZ!");
+var content = read_file("data.txt");
+delete_file("data.txt");
+
+// Directory operations
+create_dir("my_project");
+create_dir("my_project/src");
+
+// Organize project files
+create_file("my_project/README.md");
+write_file("my_project/README.md", "# My Project");
+
+create_file("my_project/src/main.mufi");
+write_file("my_project/src/main.mufi", 'print("Hello!");');
+
+// Clean up
+delete_file("my_project/README.md");
+delete_file("my_project/src/main.mufi");
+delete_dir("my_project/src");
+delete_dir("my_project");</code></pre>
+                                    </div>
+                                </div>
+                                <div class="function-item">
+                                    <h4>File Operations</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>create_file(path)</code> -
+                                            Creates new file
+                                        </li>
+                                        <li>
+                                            <code>read_file(path)</code> - Reads
+                                            file content
+                                        </li>
+                                        <li>
+                                            <code
+                                                >write_file(path, content)</code
+                                            >
+                                            - Writes to file
+                                        </li>
+                                        <li>
+                                            <code>delete_file(path)</code> -
+                                            Deletes file
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Directory Operations</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>create_dir(path)</code> -
+                                            Creates directory
+                                        </li>
+                                        <li>
+                                            <code>delete_dir(path)</code> -
+                                            Deletes directory
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p>
+                                <strong>Note:</strong> Filesystem functions
+                                require the <code>-Denable_fs</code> build flag
+                                when compiling MufiZ.
+                            </p>
+                        </div>
+
+                        <div id="network" class="module-content">
+                            <h3>Network Functions</h3>
+                            <div class="function-list">
+                                <div class="function-item">
+                                    <h4>Network Examples</h4>
+                                    <div class="code-example">
+                                        <pre><code>// HTTP requests
+var response = http_get("https://api.github.com/users/octocat");
+
+// POST with JSON data
+set_content_type("application/json");
+var userData = '{"name": "Alice", "email": "alice@example.com"}';
+var postResponse = http_post("https://httpbin.org/post", userData);
+
+// Authentication
+set_auth("Bearer your-api-token");
+var authResponse = http_get("https://api.example.com/protected");
+
+// URL utilities
+var encoded = url_encode("Hello World!");  // "Hello%20World!"
+var decoded = url_decode(encoded);         // "Hello World!"
+var urlParts = parse_url("https://api.example.com/users?id=123");
+
+// Open URL in browser
+open_url("https://github.com/Mufi-Lang/MufiZ");</code></pre>
+                                    </div>
+                                </div>
+                                <div class="function-item">
+                                    <h4>HTTP Requests</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>http_get(url)</code> -
+                                            Performs HTTP GET request
+                                        </li>
+                                        <li>
+                                            <code>http_post(url, data)</code> -
+                                            Performs HTTP POST request
+                                        </li>
+                                        <li>
+                                            <code>http_put(url, data)</code> -
+                                            Performs HTTP PUT request
+                                        </li>
+                                        <li>
+                                            <code>http_delete(url)</code> -
+                                            Performs HTTP DELETE request
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Configuration</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>set_content_type(type)</code>
+                                            - Sets content type for requests
+                                        </li>
+                                        <li>
+                                            <code>set_auth(token)</code> - Sets
+                                            authorization token
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>URL Utilities</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>parse_url(url)</code> - Parses
+                                            URL into components
+                                        </li>
+                                        <li>
+                                            <code>url_encode(string)</code> -
+                                            URL encodes a string
+                                        </li>
+                                        <li>
+                                            <code>url_decode(string)</code> -
+                                            Decodes URL encoded string
+                                        </li>
+                                        <li>
+                                            <code>open_url(url)</code> - Opens
+                                            URL in default browser
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p>
+                                <strong>Note:</strong> Network functions require
+                                the <code>-Denable_net</code> build flag when
+                                compiling MufiZ.
+                            </p>
+                        </div>
+
+                        <div id="time" class="module-content">
+                            <h3>Time Functions</h3>
+                            <div class="function-list">
+                                <div class="function-item">
+                                    <h4>Time Examples</h4>
+                                    <div class="code-example">
+                                        <pre><code>// Get current timestamps
+var currentTime = now();          // Unix timestamp in seconds
+var milliTime = now_ms();         // Milliseconds since Unix epoch
+var nanoTime = now_ns();          // Nanoseconds since Unix epoch
+
+// Measure execution time
+var startTime = now_ms();
+sleep(1);  // Wait 1 second
+var endTime = now_ms();
+var duration = endTime - startTime;  // ~1000 ms
+
+// Timeout checking
+var operationStart = now();
+var timeoutLimit = 30;  // 30 seconds
+while ((now() - operationStart) < timeoutLimit) {
+    // Do work...
+    print("Working...");
+    sleep(1);
+}
+
+// Rate limiting
+var lastRequest = 0;
+var minInterval = 1;  // 1 second between requests
+if ((now() - lastRequest) >= minInterval) {
+    // Make request
+    lastRequest = now();
+}</code></pre>
+                                    </div>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Timestamp Functions</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>now()</code> - Current
+                                            timestamp in seconds
+                                        </li>
+                                        <li>
+                                            <code>now_ns()</code> - Current
+                                            timestamp in nanoseconds
+                                        </li>
+                                        <li>
+                                            <code>now_ms()</code> - Current
+                                            timestamp in milliseconds
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="utils" class="module-content">
+                            <h3>Utility Functions</h3>
+                            <div class="function-list">
+                                <div class="function-item">
+                                    <h4>Utility Examples</h4>
+                                    <div class="code-example">
+                                        <pre><code>// Program control
+exit(0);                    // Exit with success code
+sleep(2);                   // Wait 2 seconds
+panic("Critical error!");   // Terminate with error message
+
+// Testing and debugging
+assert(2 + 2 == 4);         // Test condition
+var result = someFunction();
+assert(result != null);     // Ensure valid result
+
+// String formatting
+var name = "Alice";
+var age = 25;
+var greeting = format("Hello, {}! Age: {}", name, age);
+var shortForm = f("Hi, {}!", name);  // F-string syntax
+
+// Error handling patterns
+if (errorCondition) {
+    print("Error occurred");
+    exit(1);
+} else {
+    print("Success!");
+    exit(0);
+}</code></pre>
+                                    </div>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Program Control</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>exit(code?)</code> - Exits
+                                            program with optional code
+                                        </li>
+                                        <li>
+                                            <code>sleep(seconds)</code> - Sleeps
+                                            for given seconds
+                                        </li>
+                                        <li>
+                                            <code>panic(message?)</code> -
+                                            Panics with optional message
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Testing & Debugging</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>assert(condition)</code> -
+                                            Asserts condition is true
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>String Formatting</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code
+                                                >format(template,
+                                                values...)</code
+                                            >
+                                            - Formats string with placeholders
+                                        </li>
+                                        <li>
+                                            <code>f(template, values...)</code>
+                                            - Alias for format (f-string syntax)
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="matrix" class="module-content">
+                            <h3>Matrix Functions</h3>
+                            <div class="function-list">
+                                <div class="function-item">
+                                    <h4>Matrix Examples</h4>
+                                    <div class="code-example">
+                                        <pre><code>// Create matrices
+var I3 = eye(3);                    // 3x3 identity matrix
+var onesMatrix = ones(2, 3);        // 2x3 matrix of ones
+var zerosMatrix = zeros(3, 2);      // 3x2 matrix of zeros
+var randMatrix = rand(2, 2);        // Random matrix
+
+// Matrix operations
+var A = [[1, 2, 3], [4, 5, 6]];
+var AT = transpose(A);              // Transpose
+var matSize = size(A);              // Get dimensions
+var traceA = trace(A);              // Diagonal sum
+
+// Element access
+var element = matrix_get(A, 0, 1);  // Get A[0,1]
+matrix_set(A, 0, 1, 99);           // Set A[0,1] = 99
+
+// Matrix concatenation
+var left = [[1, 2], [3, 4]];
+var right = [[5, 6], [7, 8]];
+var combined = horzcat(left, right); // Horizontal concat</code></pre>
+                                    </div>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Matrix Creation</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>eye(n)</code> or
+                                            <code>eye(m, n)</code> - Creates
+                                            identity matrix
+                                        </li>
+                                        <li>
+                                            <code>ones(m, n)</code> - Creates
+                                            matrix of ones
+                                        </li>
+                                        <li>
+                                            <code>zeros(m, n)</code> - Creates
+                                            matrix of zeros
+                                        </li>
+                                        <li>
+                                            <code>rand(m, n)</code> - Creates
+                                            random matrix
+                                        </li>
+                                        <li>
+                                            <code>randn(m, n)</code> - Creates
+                                            random normal matrix
+                                        </li>
+                                        <li>
+                                            <code
+                                                >matrix(data, rows, cols)</code
+                                            >
+                                            - Create matrix from data
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Matrix Operations</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>transpose(A)</code> - Matrix
+                                            transpose
+                                        </li>
+                                        <li>
+                                            <code>det(A)</code> - Matrix
+                                            determinant
+                                        </li>
+                                        <li>
+                                            <code>inv(A)</code> - Matrix inverse
+                                        </li>
+                                        <li>
+                                            <code>trace(A)</code> - Matrix trace
+                                        </li>
+                                        <li>
+                                            <code>norm(A)</code> - Frobenius
+                                            norm
+                                        </li>
+                                        <li>
+                                            <code>rank(A)</code> - Matrix rank
+                                        </li>
+                                        <li>
+                                            <code>rref(A)</code> - Reduced row
+                                            echelon form
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="function-item">
+                                    <h4>Matrix Manipulation</h4>
+                                    <ul class="function-sublist">
+                                        <li>
+                                            <code>size(A)</code> - Matrix
+                                            dimensions
+                                        </li>
+                                        <li>
+                                            <code>reshape(A, m, n)</code> -
+                                            Reshape matrix
+                                        </li>
+                                        <li>
+                                            <code>horzcat(A, B)</code> -
+                                            Horizontal concatenation
+                                        </li>
+                                        <li>
+                                            <code>vertcat(A, B)</code> -
+                                            Vertical concatenation
+                                        </li>
+                                        <li>
+                                            <code>matrix_get(A, row, col)</code>
+                                            - Get matrix element
+                                        </li>
+                                        <li>
+                                            <code
+                                                >matrix_set(A, row, col,
+                                                value)</code
+                                            >
+                                            - Set matrix element
+                                        </li>
+                                        <li>
+                                            <code>flatten(A)</code> - Flatten
+                                            matrix to vector
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="releases-section">
+                <div class="container">
+                    <h2>Release History</h2>
+                    <div class="releases-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Version</th>
+                                    <th>Codename</th>
+                                    <th>Status</th>
+                                    <th>Key Features</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="latest">
+                                    <td>0.10.0</td>
+                                    <td>Echo</td>
+                                    <td>
+                                        <span class="status-badge latest"
+                                            >Latest</span
+                                        >
+                                    </td>
+                                    <td>
+                                        Enhanced REPL, improved input handling,
+                                        terminal optimizations
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>0.9.0</td>
+                                    <td>Kova</td>
+                                    <td>
+                                        <span class="status-badge released"
+                                            >Released</span
+                                        >
+                                    </td>
+                                    <td>Performance improvements, bug fixes</td>
+                                </tr>
+                                <tr>
+                                    <td>0.8.0</td>
+                                    <td>Ruby</td>
+                                    <td>
+                                        <span class="status-badge released"
+                                            >Released</span
+                                        >
+                                    </td>
+                                    <td>
+                                        Matrix operations, linear algebra
+                                        support
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>0.7.0</td>
+                                    <td>Jade</td>
+                                    <td>
+                                        <span class="status-badge released"
+                                            >Released</span
+                                        >
+                                    </td>
+                                    <td>
+                                        SIMD optimizations, hash table
+                                        improvements
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>0.6.0</td>
+                                    <td>Mars</td>
+                                    <td>
+                                        <span class="status-badge released"
+                                            >Released</span
+                                        >
+                                    </td>
+                                    <td>
+                                        Memory optimizations, arena allocators
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>MufiZ</h3>
+                        <p>Mufi Lang with Ziggyness</p>
+                        <p>Built with Zig v0.15.2</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li>
+                                <a href="https://github.com/Mufi-Lang/MufiZ"
+                                    >GitHub Repository</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="https://github.com/Mufi-Lang/MufiZ/releases"
+                                    >Releases</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Community</h4>
+                        <ul>
+                            <li>
+                                <a
+                                    href="https://github.com/Mufi-Lang/MufiZ/issues"
+                                    >Issues</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="https://github.com/Mufi-Lang/MufiZ/discussions"
+                                    >Discussions</a
+                                >
+                            </li>
+                            <li>
+                                <a href="https://opencollective.com/mokareads"
+                                    >Support</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Related Projects</h4>
+                        <ul>
+                            <li>
+                                <a
+                                    href="https://github.com/Mustafif/homebrew-mufi"
+                                    >Homebrew Tap</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="https://github.com/Mustafif/mufi-bucket"
+                                    >Scoop Bucket</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 MufiZ. Licensed under GPL-2.0.</p>
+                </div>
+            </div>
+        </footer>
+
+        <script src="script.js"></script>
+    </body>
+</html>
