@@ -677,17 +677,37 @@ textarea::placeholder {
     font-weight: 500;
     color: var(--text-secondary);
     transition: all var(--transition-fast);
+    position: relative;
+    z-index: 1;
+    pointer-events: auto;
+    user-select: none;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .module-btn:hover {
     background: var(--bg-primary);
     color: var(--text-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
 }
 
 .module-btn.active {
     background: var(--primary-color);
     color: var(--text-white);
     border-color: var(--primary-color);
+    box-shadow: var(--shadow-md);
+}
+
+.module-btn:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.module-btn:active {
+    transform: translateY(0);
 }
 
 .module-content {

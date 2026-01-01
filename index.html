@@ -1351,6 +1351,48 @@ var combined = horzcat(left, right); // Horizontal concat</code></pre>
             </div>
         </footer>
 
-        <script src="script.js"></script>
+        <script src="script.js" defer></script>
+        <script>
+            // Additional fallback for HTTP server environments
+            document.addEventListener("DOMContentLoaded", function() {
+                console.log("DOM Content Loaded - checking module navigation");
+
+                // Force refresh module navigation if buttons exist but aren't working
+                setTimeout(function() {
+                    const buttons = document.querySelectorAll(".module-btn");
+                    if (buttons.length > 0) {
+                        console.log("Found " + buttons.length + " module buttons");
+
+                        // Test if first button has click handler
+                        const firstBtn = buttons[0];
+                        if (!firstBtn._moduleHandler && !firstBtn.onclick) {
+                            console.log("No handlers found, manually adding...");
+
+                            buttons.forEach(function(button) {
+                                button.addEventListener("click", function() {
+                                    const targetModule = this.getAttribute("data-module");
+                                    console.log("Manual handler: switching to " + targetModule);
+
+                                    // Clear all active states
+                                    document.querySelectorAll(".module-btn").forEach(function(btn) {
+                                        btn.classList.remove("active");
+                                    });
+                                    document.querySelectorAll(".module-content").forEach(function(content) {
+                                        content.classList.remove("active");
+                                    });
+
+                                    // Set new active states
+                                    this.classList.add("active");
+                                    const targetContent = document.getElementById(targetModule);
+                                    if (targetContent) {
+                                        targetContent.classList.add("active");
+                                    }
+                                });
+                            });
+                        }
+                    }
+                }, 500);
+            });
+        </script>
     </body>
 </html>

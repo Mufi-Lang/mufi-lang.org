@@ -1,6 +1,7 @@
 // MufiZ Documentation Website JavaScript
 
-document.addEventListener("DOMContentLoaded", function () {
+// Multiple initialization strategies for different environments
+function initializeApp() {
   // Theme System
   const themeToggle = document.getElementById("theme-toggle");
   const themeIcon = document.querySelector(".theme-icon");
@@ -89,28 +90,107 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Module Navigation for Functions Section
-  const moduleButtons = document.querySelectorAll(".module-btn");
-  const moduleContents = document.querySelectorAll(".module-content");
+  // Module Navigation - Robust for server environments
+  function initModuleNavigation() {
+    console.log("🔍 Initializing module navigation...");
 
-  if (moduleButtons.length > 0 && moduleContents.length > 0) {
+    const moduleButtons = document.querySelectorAll(".module-btn");
+    const moduleContents = document.querySelectorAll(".module-content");
+
+    console.log(
+      `Found ${moduleButtons.length} buttons and ${moduleContents.length} contents`,
+    );
+
+    if (moduleButtons.length === 0) {
+      console.error("❌ No module buttons found!");
+      return false;
+    }
+
+    // Remove any existing event listeners to prevent duplicates
     moduleButtons.forEach((button) => {
-      button.addEventListener("click", function () {
-        const targetModule = this.getAttribute("data-module");
+      button.onclick = null;
+      button.removeEventListener("click", button._moduleHandler);
+    });
 
-        // Remove active class from all buttons and contents
-        moduleButtons.forEach((btn) => btn.classList.remove("active"));
-        moduleContents.forEach((content) => content.classList.remove("active"));
+    // Add click handlers to each button
+    moduleButtons.forEach((button, index) => {
+      const targetModule = button.getAttribute("data-module");
+      console.log(`➕ Adding handler to button ${index}: ${targetModule}`);
 
-        // Add active class to clicked button and corresponding content
+      // Store handler reference for cleanup
+      button._moduleHandler = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        console.log(`🖱️ Button clicked: ${targetModule}`);
+
+        // Remove active from all
+        document
+          .querySelectorAll(".module-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        document
+          .querySelectorAll(".module-content")
+          .forEach((content) => content.classList.remove("active"));
+
+        // Add active to clicked button
         this.classList.add("active");
+
+        // Show target content
         const targetContent = document.getElementById(targetModule);
         if (targetContent) {
           targetContent.classList.add("active");
+          console.log(`✅ Activated ${targetModule} content`);
+        } else {
+          console.error(`❌ No content found for ${targetModule}`);
         }
-      });
+      };
+
+      button.addEventListener("click", button._moduleHandler);
+
+      // Also add onclick as fallback
+      button.onclick = button._moduleHandler;
     });
+
+    // Set core as default active
+    const coreBtn = document.querySelector('[data-module="core"]');
+    const coreContent = document.getElementById("core");
+    if (coreBtn && coreContent) {
+      // Clear all active states first
+      moduleButtons.forEach((btn) => btn.classList.remove("active"));
+      moduleContents.forEach((content) => content.classList.remove("active"));
+
+      coreBtn.classList.add("active");
+      coreContent.classList.add("active");
+      console.log("✅ Core module set as default");
+    }
+
+    console.log("🎉 Module navigation initialized successfully!");
+    return true;
   }
+
+  // Initialize with multiple attempts and strategies
+  let initAttempts = 0;
+  const maxAttempts = 10;
+
+  function tryInitModules() {
+    initAttempts++;
+    console.log(`🔄 Module init attempt ${initAttempts}`);
+
+    if (initModuleNavigation()) {
+      console.log("✅ Module navigation successful!");
+      return;
+    }
+
+    if (initAttempts < maxAttempts) {
+      setTimeout(tryInitModules, 200 * initAttempts);
+    } else {
+      console.error(
+        "❌ Failed to initialize module navigation after all attempts",
+      );
+    }
+  }
+
+  tryInitModules();
 
   // Smooth Scrolling for Navigation Links
   const navbarLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
@@ -250,8 +330,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Search functionality for functions
   function createSearchBox() {
-    const functionsSection = document.getElementById("functions");
-    if (!functionsSection) return;
+    console.log("🔍 Creating search box...");
+    const functionsSection = document.getElementById("standard-library");
+
+    if (!functionsSection) {
+      console.error("❌ Could not find standard-library section");
+      return;
+    }
+
+    console.log("✅ Found standard-library section");
+
+    // Check if search box already exists
+    if (functionsSection.querySelector(".search-container")) {
+      console.log("⚠️ Search box already exists");
+      return;
+    }
 
     const searchContainer = document.createElement("div");
     searchContainer.className = "search-container";
@@ -262,7 +355,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const searchInput = document.createElement("input");
     searchInput.type = "text";
-    searchInput.placeholder = "Search functions...";
+    searchInput.placeholder = "Search functions... (Press Ctrl+K)";
     searchInput.className = "search-input";
     searchInput.style.cssText = `
             width: 100%;
@@ -274,7 +367,19 @@ document.addEventListener("DOMContentLoaded", function () {
             background: var(--bg-primary);
             color: var(--text-primary);
             box-shadow: var(--shadow-sm);
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
         `;
+
+    // Add focus styles
+    searchInput.addEventListener("focus", () => {
+      searchInput.style.borderColor = "var(--primary-color)";
+      searchInput.style.boxShadow = "0 0 0 3px rgba(37, 99, 235, 0.1)";
+    });
+
+    searchInput.addEventListener("blur", () => {
+      searchInput.style.borderColor = "var(--border-light)";
+      searchInput.style.boxShadow = "var(--shadow-sm)";
+    });
 
     searchContainer.appendChild(searchInput);
 
@@ -282,23 +387,35 @@ document.addEventListener("DOMContentLoaded", function () {
     const introP = functionsSection.querySelector("p");
     if (introP) {
       introP.parentNode.insertBefore(searchContainer, introP.nextSibling);
+      console.log("✅ Search box inserted successfully");
+    } else {
+      // Fallback: insert after h2
+      const h2 = functionsSection.querySelector("h2");
+      if (h2) {
+        h2.parentNode.insertBefore(searchContainer, h2.nextSibling);
+        console.log("✅ Search box inserted after h2");
+      }
     }
 
     // Search functionality
     searchInput.addEventListener("input", function () {
       const searchTerm = this.value.toLowerCase();
+      console.log("🔍 Searching for:", searchTerm);
+
       const functionItems = document.querySelectorAll(".function-item");
+      console.log("📝 Found function items:", functionItems.length);
 
       functionItems.forEach((item) => {
         const text = item.textContent.toLowerCase();
-        const shouldShow = text.includes(searchTerm);
+        const shouldShow = searchTerm === "" || text.includes(searchTerm);
         item.style.display = shouldShow ? "block" : "none";
       });
 
-      // Update module buttons to show/hide based on visible content
+      // Update module buttons based on visible content
+      const moduleContents = document.querySelectorAll(".module-content");
       moduleContents.forEach((content) => {
         const visibleItems = content.querySelectorAll(
-          '.function-item[style*="block"], .function-item:not([style])',
+          '.function-item:not([style*="none"])',
         );
         const moduleButton = document.querySelector(
           `[data-module="${content.id}"]`,
@@ -315,7 +432,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  createSearchBox();
+  // Initialize search with multiple attempts
+  let searchAttempts = 0;
+  function tryCreateSearchBox() {
+    searchAttempts++;
+    console.log(`🔄 Search box attempt ${searchAttempts}`);
+
+    if (document.getElementById("standard-library")) {
+      createSearchBox();
+      console.log("✅ Search box initialized!");
+    } else if (searchAttempts < 5) {
+      setTimeout(tryCreateSearchBox, 200 * searchAttempts);
+    }
+  }
+
+  tryCreateSearchBox();
 
   // Keyboard shortcuts
   document.addEventListener("keydown", function (e) {
@@ -469,5 +600,70 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // Add debug info for troubleshooting
+  setTimeout(function () {
+    const debugInfo = document.createElement("div");
+    debugInfo.id = "debug-info";
+    debugInfo.style.cssText = `
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      z-index: 1000;
+      max-width: 300px;
+    `;
+
+    const buttons = document.querySelectorAll(".module-btn");
+    const contents = document.querySelectorAll(".module-content");
+    const searchBox = document.querySelector(".search-input");
+
+    debugInfo.innerHTML = `
+      <strong>🔍 Debug Info:</strong><br>
+      Module Buttons: ${buttons.length}<br>
+      Module Contents: ${contents.length}<br>
+      Search Box: ${searchBox ? "✅" : "❌"}<br>
+      Ready State: ${document.readyState}<br>
+      <button onclick="this.parentElement.remove()" style="margin-top:5px;">Close</button>
+    `;
+
+    document.body.appendChild(debugInfo);
+  }, 1000);
+
   console.log("MufiZ Documentation loaded successfully! 🚀");
+}
+
+// Multiple initialization strategies for different environments
+document.addEventListener("DOMContentLoaded", initializeApp);
+
+// Fallback for environments where DOMContentLoaded might not fire properly
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeApp);
+} else {
+  // DOM already loaded
+  initializeApp();
+}
+
+// Additional fallback with window.onload
+window.addEventListener("load", function () {
+  console.log("🔄 Window load event - reinitializing if needed");
+
+  // Only reinitialize if module buttons don't have handlers
+  const buttons = document.querySelectorAll(".module-btn");
+  if (buttons.length > 0 && !buttons[0]._moduleHandler) {
+    console.log("🔄 Reinitializing module navigation from window.load");
+    setTimeout(initializeApp, 100);
+  }
 });
+
+// Force initialization after a delay as final fallback
+setTimeout(function () {
+  const buttons = document.querySelectorAll(".module-btn");
+  if (buttons.length > 0 && !buttons[0]._moduleHandler) {
+    console.log("🔄 Final fallback initialization");
+    initializeApp();
+  }
+}, 2000);
